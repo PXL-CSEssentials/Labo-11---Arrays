@@ -23,28 +23,33 @@ namespace Labo_11___Arrays
 
         private void outputButton_Click(object sender, RoutedEventArgs e)
         {
-            int smallest = int.MaxValue;
-            int biggest = int.MinValue;
-
-            //int[] getallen = new int[6] { 100, 50, 20, 60, 90, 80 };
             int[] getallen = { 100, 50, 20, 60, 90, 80 };
+            int[] result = ReturnSmallestAndBiggest(getallen);
+
             StringBuilder sbOutput = new StringBuilder();
-            sbOutput.Append($"In totaal zijn er {getallen.Length} getallen: ");
-            for (int i = 0; i < getallen.Length; i++)
+            sbOutput.AppendLine($"In totaal zijn er {getallen.Length} getallen: ");
+            sbOutput.AppendLine($"Kleinste getal = {result[0]}");
+            sbOutput.Append($"Grootste getal = {result[1]}");
+            outputTextBox.Text = sbOutput.ToString();
+        }
+
+        private int[] ReturnSmallestAndBiggest(int[] range)
+        {
+            int[] result = new int[2];
+            result[0] = range[0];
+            result[1] = range[0];
+            for (int i = 0; i < range.Length; i++)
             {
-                if (getallen[i] > biggest)
+                if (range[i] < result[0])
                 {
-                    biggest = getallen[i];
+                    result[0] = range[i];
                 }
-                if (getallen[i] < smallest)
+                if (range[i] > result[1])
                 {
-                    smallest = getallen[i];
+                    result[1] = range[i];
                 }
             }
-            sbOutput.AppendLine();
-            sbOutput.AppendLine($"Kleinste getal = {smallest}");
-            sbOutput.AppendLine($"Grootste getal = {biggest}");
-            outputTextBox.Text = sbOutput.ToString();
+            return result;
         }
     }
 }
